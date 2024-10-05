@@ -7,8 +7,7 @@ CANVAS_HEIGHT = 480
 CANVAS_CENTER_X = CANVAS_WIDTH / 2
 CANVAS_CENTER_Y = CANVAS_HEIGHT / 2
 IMAGE_ENLARGE = 11
-#HEART_COLOR = "#F76070" #pink
-HEART_COLOR = "#3399FF" #blue
+HEART_COLOR = "#3399FF" 
 
 def heart_function(t, shrink_ratio: float = IMAGE_ENLARGE):
     x = 16 * (sin(t) ** 3)
@@ -22,7 +21,6 @@ def heart_function(t, shrink_ratio: float = IMAGE_ENLARGE):
 
     return int(x), int(y)
 
-
 def scatter_inside(x, y, beta = 0.15):
     ratio_x = - beta * log(random.random())
     ratio_y = - beta * log(random.random())
@@ -32,17 +30,14 @@ def scatter_inside(x, y, beta = 0.15):
 
     return x - dx, y - dy
 
-
 def shrink(x, y, ratio):
     force = -1 / (((x - CANVAS_CENTER_X) ** 2 + (y - CANVAS_CENTER_Y) ** 2) ** 0.6)
     dx = ratio * force * (x - CANVAS_CENTER_X)
     dy = ratio * force * (y - CANVAS_CENTER_Y)
     return x - dx, y - dy
 
-
 def curve(p):
     return 2 * (2 * sin(4 * p)) / (2 * pi)
-
 
 class Heart:
 
@@ -128,12 +123,10 @@ class Heart:
         for x, y, size in self.all_points[render_frame % self.generate_frame]:
             render_canvas.create_rectangle(x, y, x + size, y + size, width = 0, fill = HEART_COLOR)
 
-
 def draw(main: Tk, render_canvas: Canvas, render_heart: Heart, render_frame = 0):
     render_canvas.delete('all')
     render_heart.render(render_canvas, render_frame)
     main.after(160, draw, main, render_canvas, render_heart, render_frame + 1)
-
 
 if __name__ == '__main__':
     root = Tk()
